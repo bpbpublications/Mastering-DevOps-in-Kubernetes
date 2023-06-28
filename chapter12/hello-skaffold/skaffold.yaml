@@ -1,0 +1,9 @@
+apiVersion: skaffold/v1
+kind: Config
+build:
+  artifacts:
+  - image: soumiyajit/hello-skaffold
+deploy:
+  kubectl:
+    manifests:
+      - manifests/hello-*

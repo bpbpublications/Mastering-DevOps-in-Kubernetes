@@ -1,0 +1,8 @@
+apiVersion: devops.example.com/v1
+kind: BookApp
+metadata:
+  name: demo-bookapp-crd
+spec:
+  book-name: Mastering-DevOps
+  bookapp-owner: BPB-Publications
+  bookapp-years: 10

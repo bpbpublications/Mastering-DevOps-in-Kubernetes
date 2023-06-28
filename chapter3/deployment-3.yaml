@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-nodeport
+spec:
+  selector:
+    matchLabels:
+      run: nginx-nodeport
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: nginx-nodeport
+    spec:
+      containers:
+      - name: nginx-nodeport
+        image: nginx:1.22
+        ports:
+        - containerPort: 80

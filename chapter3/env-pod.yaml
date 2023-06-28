@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-pod
+  labels:
+    purpose: demo
+spec:
+  containers:
+  - name: env-pod-container
+    image: nginx
+    env:
+    - name: POD_PURPOSE
+      value: "Mastering DevOps"
+    - name: TARGET_USERS
+      value: "BPB Subscribers"
+    - name: APP_NAME
+      value: "Nginx"
+    - name: TEAM
+      value: "DevOps"
+    - name: CONTACT
+      value: "support@example.com"

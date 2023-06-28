@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-demo-1
+spec:
+  containers:
+    - name: configmap-container
+      image: nginx
+      env:
+        - name: CONFIGMAP-1-DATA
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-1
+              key: POD_PURPOSE
+        - name: CONFIGMAP-2-DATA
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-2
+              key: APP_NAME
+              key: TEAM
+  restartPolicy: Never
+

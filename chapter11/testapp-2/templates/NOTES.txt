@@ -1,0 +1,6 @@
+The name of the release is {{ .Release.Name }} and it would installed in namespace {{ .Release.Namespace }}.
+The Revision number is {{ .Release.Revision }}
+For installation operation this should be true:: {{ .Release.IsInstall }} 
+For upgrade operation this should be true:: {{ .Release.IsUpgrade }}
+The name of the chart is {{ .Chart.Name }} and the version of the chart is {{ .Chart.Version }}.
+The Helm version we are using is {{ .Capabilities.HelmVersion.Version }}

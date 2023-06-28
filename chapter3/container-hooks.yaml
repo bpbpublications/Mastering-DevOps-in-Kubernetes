@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: container-hook-pod
+spec:
+  containers:
+    - name: httpd-container
+      image: httpd
+      lifecycle:
+        postStart:
+          exec:
+            command:
+              ['/bin/sh', '-c', 'echo Mastering DevOps postStart! > /var/tmp/poststart.txt']
+        preStop:
+          exec:
+            command: ['/bin/sh', '-c', 'sleep 20']

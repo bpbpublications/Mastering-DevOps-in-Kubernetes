@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: initdir
+          mountPath: /usr/share/nginx/html/
+      initContainers:
+      - name: busybox-container
+        image: busybox
+        command: ["/bin/sh"]
+        args: ["-c", "echo '<html><h1>Accessing the Frontend App using Nginx Ingress</h1>' >> /init-dir/index.html"]
+        volumeMounts:
+        - name: initdir
+          mountPath: "/init-dir"
+      volumes:
+      - name: initdir
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  ports:
+    - port: 80
+  type: ClusterIP
+  selector:
+    app: frontend

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-2
+  namespace: default
+data:
+  APP_NAME: Nginx
+  TEAM: DevOps
+  CONTACT: support@example.com
+

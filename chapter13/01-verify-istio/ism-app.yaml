@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ism-app
+spec:
+  selector:
+    matchLabels:
+      app: ism-app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ism-app
+    spec:
+      containers:
+      - name: ism-app
+        image: soumiyajit/ism-app
+        ports:
+        - containerPort: 8080
