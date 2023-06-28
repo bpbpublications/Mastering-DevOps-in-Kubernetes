@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postinstall-hook
+  annotations:
+    helm.sh/hook: post-install
+spec:
+  containers:
+  - name: posthook-container
+    image: busybox
+    imagePullPolicy: IfNotPresent
+    command: ['sh', '-c', 'echo DevOps post-install hook - post-install&& sleep 20']
+  restartPolicy: Never
+  terminationGracePeriodSeconds: 0

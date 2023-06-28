@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-startup-probe
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    startupProbe:
+      exec:
+        command:
+        - cat 
+        - /etc/hosts
+      periodSeconds: 15
+      failureThreshold: 10

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nfs-webapp
+spec:
+  volumes:
+  - name: nfs-volume
+    persistentVolumeClaim:
+      claimName: pvc-2
+  containers:
+  - image: nginx
+    name: nginx
+    volumeMounts:
+    - name: nfs-volume
+      mountPath: /webdata

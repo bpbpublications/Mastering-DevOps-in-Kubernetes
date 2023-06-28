@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ism-app
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - ism-app-gateway
+  http:
+  - match:
+    - uri:
+        exact: "/api/ism-app"
+    route:
+      - destination:
+          host: ism-app
+          subset: v2
+  - match:
+    - uri:
+        prefix: "/api/v2/"
+    rewrite:
+      uri: "/api/"
+    route:
+      - destination:
+          host: ism-app
+          subset: v2
+  - match:
+    - uri:
+        prefix: "/api/v1/"
+    rewrite:
+      uri: "/api/"
+    route:
+      - destination:
+          host: ism-app
+          subset: v1

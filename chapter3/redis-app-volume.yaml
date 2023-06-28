@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: redis-app-volume
+  name: redis-app-volume
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redis-app-volume
+  template:
+    metadata:
+      labels:
+        app: redis-app-volume
+    spec:
+      containers:
+      - image: redis
+        name: redis
+        volumeMounts:
+        - name: secret-volume
+          mountPath: "/etc/secret-volume"
+          readOnly: true
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: k8secret
+          optional: false 

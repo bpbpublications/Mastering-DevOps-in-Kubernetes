@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-1
+  namespace: default
+data:
+  POD_PURPOSE: Mastering DevOps
+  TARGET_USERS: BPB Subscribers
+

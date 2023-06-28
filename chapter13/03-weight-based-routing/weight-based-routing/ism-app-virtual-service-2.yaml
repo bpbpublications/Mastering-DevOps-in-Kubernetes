@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ism-app-virtual-service
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - ism-app-gateway
+  http:
+  - route:
+    - destination:
+        host: ism-app
+        subset: v1
+      weight: 40
+    - destination:
+        host: ism-app
+        subset: v2
+      weight: 60

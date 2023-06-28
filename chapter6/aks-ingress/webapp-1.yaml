@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webapp
+  name: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: initdir
+          mountPath: /usr/share/nginx/html
+      initContainers:
+      - name: busybox-container
+        image: busybox
+        command: ["/bin/sh"]
+        args: ["-c", "echo '<html><h1>Access the WebApp using Nginx Ingress Confuguration</h1>' >> /init-dir/index.html"]
+        volumeMounts:
+        - name: initdir
+          mountPath: "/init-dir"
+      volumes:
+      - name: initdir
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp
+spec:
+  ports:
+    - port: 80
+  type: ClusterIP
+  selector:
+    app: webapp

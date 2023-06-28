@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: preinstall-hook3
+  annotations:
+    "helm.sh/hook": "pre-install"
+    "helm.sh/hook-weight": "6"
+spec:
+  containers:
+  - name: prehook-container3
+    image: busybox
+    imagePullPolicy: IfNotPresent
+    command: ['sh', '-c', 'echo DevOps pre-install hook3 && sleep 20' ]
+  restartPolicy: Never
+  terminationGracePeriodSeconds: 0

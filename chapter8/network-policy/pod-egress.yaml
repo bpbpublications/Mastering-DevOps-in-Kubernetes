@@ -1,0 +1,24 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: foo-egress-hello
+  namespace: ns-2
+spec:
+  policyTypes:
+  - Egress
+  podSelector:
+    matchLabels:
+      app: foo
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          user: engineering
+    - podSelector:
+        matchLabels:
+          app: hello
+  - ports:
+    - port: 53
+      protocol: TCP
+    - port: 53
+      protocol: UDP

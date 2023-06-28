@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ism-app
+  labels:
+    app: ism-app
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: ism-app
+

@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: messenger-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: messenger
+        image: busybox:stable
+        command: ["echo", "This is K8s Job in Mastering DevOps"]
+      restartPolicy: Never
+  backoffLimit: 4
+  activeDeadlineSeconds: 10

@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prom-sample-app-cm
+data:
+  TIMEOUT: "5"
+  PORT: "8080"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prom-sample-app
+  labels:
+    app: prom-sample-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: prom-sample-app
+  template:
+    metadata:
+      labels:
+        app: prom-sample-app
+    spec:
+      containers:
+      - name: prom-sample-app
+        image: soumiyajit/prom_sample_app
+        env:
+        - name: TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              name: prom-sample-app-cm
+              key: TIMEOUT
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: prom-sample-app-cm
+              key: PORT

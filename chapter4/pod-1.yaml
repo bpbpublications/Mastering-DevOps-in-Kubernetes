@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pv-1-pod
+spec:
+  volumes:
+    - name: pv-1-storage
+      persistentVolumeClaim:
+        claimName: pv-1-claim
+  containers:
+    - name: pv-1-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "webapp"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: pv-1-storage
+  nodeSelector:
+    kubernetes.io/hostname: k8s-worker1
