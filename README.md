@@ -1,2 +1,2 @@
-# Mastering DevOps with Kubernetes
- Mastering DevOps with Kubernetes, By BPB Publications
+# Mastering DevOps in Kubernetes
+ Mastering DevOps in Kubernetes, By BPB Publications
